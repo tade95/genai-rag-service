@@ -1,0 +1,45 @@
+# 🎯 Objetivo del CI/CD
+
+# Validar que el backend importa y corre
+
+# Forzar estándares mínimos
+
+# Build de Docker reproducible
+
+# Base lista para deploy (Cloud Run / K8s)
+
+name: CI
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint (basic import check)
+        run: |
+          python - <<EOF
+          import app.main
+          print("Imports OK")
+          EOF
+
+      - name: Build Docker image
+        run: |
+          docker build -f docker/Dockerfile -t genai-rag-service:ci .
