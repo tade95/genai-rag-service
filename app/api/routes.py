@@ -35,3 +35,11 @@ def ask_question(request: AskRequest):
 @router.get("/health")
 def health_check():
     return {"status": "healthy"}
+
+@router.get("/ready")
+def readiness():
+    # acá más adelante podés chequear:
+    # - vector store
+    # - modelo cargado
+    # - conexión externa
+    return {"status": "ready"}
