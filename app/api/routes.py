@@ -5,6 +5,9 @@ Endpoints base
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List
+from app.rag.knowledge import vector_store
+from app.rag.prompt import build_prompt
+from app.llm.client import generate_answer
 
 router = APIRouter()
 
@@ -27,10 +30,15 @@ def ask_question(request: AskRequest):
     """
     Endpoint para hacer preguntas.
     """
+    context = vector_store.search(request.question)
+    prompt = build_prompt(request.question, context)
+    answer = (generate_answer(prompt)
+    )
     # Lógica para responder preguntas
     return {
         "question": request.question,
-        "answer": "This is a placeholder response from the GenAI service.",
+        "context": context,
+        "answer": answer
     }
 @router.get("/health")
 def health_check():

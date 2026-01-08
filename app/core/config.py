@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     environment: str = "development"
     log_level: str = "info"
     app_version: str = "0.1.0"
+    openai_api_key: str
+    openai_model: str = "gpt-4o-mini"
     
     class Config:
         env_file = ".env"

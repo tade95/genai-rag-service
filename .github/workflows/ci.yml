@@ -34,3 +34,5 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t genai-rag-service .
+env:
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
