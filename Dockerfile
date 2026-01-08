@@ -6,7 +6,7 @@
 # - Compatible con CI/CD
 
 # Base image
-FROM python:3.11-slim
+FROM python:3.10-slim
 
 # Prevents Python from writing pyc files
 ENV PYTHONDONTWRITEBYTECODE=1

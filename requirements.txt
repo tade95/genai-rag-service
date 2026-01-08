@@ -5,3 +5,6 @@ pydantic-settings
 sentence-transformers
 numpy
 openai
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
